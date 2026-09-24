@@ -170,7 +170,7 @@
         }
 
         .logo-primero {
-            animation: splashLogoPrimeroEntrada 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: fadeOutLogo 2s forwards;
             filter: drop-shadow(0 0 30px rgba(255, 122, 0, 0.7));
         }
 
@@ -191,9 +191,8 @@
             width: 100%;
             max-height: 40vh;
             object-fit: contain;
-            animation: splashImgFlotarMovimiento 3.4s ease-in-out infinite alternate;
+            animation: flotarImagen 4s ease-in-out infinite alternate;
             filter: drop-shadow(0 0 25px rgba(255, 122, 0, 0.5));
-            will-change: transform, filter;
         }
 
         .splash-badge {
@@ -312,40 +311,24 @@
             }
         }
 
-        @keyframes splashLogoPrimeroEntrada {
+        @keyframes fadeOutLogo {
             0% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+
+            45% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            55% {
                 opacity: 0;
-                transform: scale(0.65) translateY(25px) rotate(-3deg);
-                filter: drop-shadow(0 0 10px rgba(255, 122, 0, 0.3));
-            }
-
-            25% {
-                opacity: 1;
-                transform: scale(1.08) translateY(-8px) rotate(1.5deg);
-                filter: drop-shadow(0 0 40px rgba(255, 122, 0, 0.95)) drop-shadow(0 0 70px rgba(255, 204, 0, 0.6));
-            }
-
-            50% {
-                opacity: 1;
-                transform: scale(1) translateY(0) rotate(0deg);
-                filter: drop-shadow(0 0 30px rgba(255, 122, 0, 0.8));
-            }
-
-            70% {
-                opacity: 1;
-                transform: scale(1.03) translateY(-4px) rotate(-1deg);
-                filter: drop-shadow(0 0 45px rgba(255, 204, 0, 0.85));
-            }
-
-            88% {
-                opacity: 0.3;
-                transform: scale(0.96) translateY(8px);
+                transform: scale(0.98);
             }
 
             100% {
                 opacity: 0;
-                transform: scale(0.9) translateY(18px);
-                visibility: hidden;
             }
         }
 
@@ -373,25 +356,15 @@
             }
         }
 
-        @keyframes splashImgFlotarMovimiento {
+        @keyframes flotarImagen {
             0% {
-                transform: translateY(0px) rotate(0deg) scale(1);
-                filter: drop-shadow(0 0 18px rgba(255, 122, 0, 0.5)) drop-shadow(0 0 35px rgba(255, 204, 0, 0.25));
-            }
-
-            33% {
-                transform: translateY(-10px) rotate(-1.5deg) scale(1.02);
-                filter: drop-shadow(0 0 30px rgba(255, 122, 0, 0.8)) drop-shadow(0 0 50px rgba(255, 204, 0, 0.45));
-            }
-
-            66% {
-                transform: translateY(-16px) rotate(1.2deg) scale(1.04);
-                filter: drop-shadow(0 0 38px rgba(255, 122, 0, 0.95)) drop-shadow(0 0 65px rgba(255, 204, 0, 0.6));
+                transform: translateY(0);
+                filter: drop-shadow(0 0 12px rgba(255, 122, 0, 0.4));
             }
 
             100% {
-                transform: translateY(-6px) rotate(0deg) scale(1.01);
-                filter: drop-shadow(0 0 25px rgba(255, 122, 0, 0.7)) drop-shadow(0 0 45px rgba(255, 204, 0, 0.35));
+                transform: translateY(-12px);
+                filter: drop-shadow(0 0 28px rgba(255, 122, 0, 0.75));
             }
         }
 
@@ -462,9 +435,6 @@
             align-items: center;
             perspective: 1000px;
             cursor: pointer;
-            animation: flowLogoWrapperLevitar 3.6s ease-in-out infinite;
-            transform-style: preserve-3d;
-            transition: filter 0.4s ease;
         }
 
         .logo-wrapper::after {
@@ -474,18 +444,9 @@
             height: 140px;
             border-radius: 50%;
             background: radial-gradient(circle, rgba(255, 122, 0, 0.85) 0%, rgba(255, 204, 0, 0.4) 45%, transparent 75%);
-            opacity: 0.35;
+            opacity: 0;
             pointer-events: none;
             z-index: -1;
-            filter: blur(8px);
-            animation: auraPulsante 3s ease-in-out infinite alternate;
-            transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
-        }
-
-        .logo-wrapper:hover::after {
-            opacity: 0.85;
-            filter: blur(14px);
-            transform: scale(1.3);
         }
 
         .logo-wrapper.animar-logo::after {
@@ -496,36 +457,25 @@
             animation: logoLlamativoImpacto 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
 
-        .logo-wrapper.logo-click-efecto {
-            animation: logoClickPunch 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
-
         .logo {
             position: absolute;
             max-height: 185px;
             max-width: 100%;
             height: auto;
             opacity: 0;
-            transform: scale(0.75) rotateY(85deg) translateY(10px);
-            transition: opacity 0.65s cubic-bezier(0.2, 0.8, 0.2, 1),
-                        transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1),
-                        filter 0.65s ease;
+            transition: opacity 0.6s ease-in-out, transform 0.4s ease;
+            animation: flowFlotarYBrillar 4.5s ease-in-out infinite;
             will-change: transform, filter, opacity;
             pointer-events: none;
-            user-select: none;
-            -webkit-user-drag: none;
         }
 
         .logo.activa {
             opacity: 1;
-            transform: scale(1) rotateY(0deg) translateY(0);
             pointer-events: auto;
-            animation: logoGlowBreathing 3s ease-in-out infinite alternate;
         }
 
         .logo-wrapper:hover .logo.activa {
-            transform: scale(1.12) rotate(-1.5deg) !important;
-            filter: drop-shadow(0 0 35px var(--color-primario)) drop-shadow(0 0 70px var(--color-secundario)) !important;
+            transform: scale(1.08) rotate(-1deg);
         }
 
         /* Brand Pill Subtitle */
@@ -573,67 +523,20 @@
             }
         }
 
-        @keyframes flowLogoWrapperLevitar {
+        @keyframes flowFlotarYBrillar {
             0% {
-                transform: translateY(0px) rotate(0deg);
-            }
-
-            25% {
-                transform: translateY(-8px) rotate(-2deg);
+                transform: translateY(0px) scale(1);
+                filter: drop-shadow(0 0 16px rgba(255, 122, 0, 0.55)) drop-shadow(0 0 35px rgba(255, 204, 0, 0.25));
             }
 
             50% {
-                transform: translateY(-14px) rotate(1deg);
-            }
-
-            75% {
-                transform: translateY(-6px) rotate(2deg);
+                transform: translateY(-10px) scale(1.02);
+                filter: drop-shadow(0 0 28px rgba(255, 122, 0, 0.85)) drop-shadow(0 0 55px rgba(255, 204, 0, 0.6));
             }
 
             100% {
-                transform: translateY(0px) rotate(0deg);
-            }
-        }
-
-        @keyframes auraPulsante {
-            0% {
-                transform: scale(0.9);
-                opacity: 0.35;
-            }
-
-            100% {
-                transform: scale(1.22);
-                opacity: 0.75;
-            }
-        }
-
-        @keyframes logoGlowBreathing {
-            0% {
-                transform: scale(1) translateY(0);
-                filter: drop-shadow(0 0 18px rgba(255, 122, 0, 0.65)) drop-shadow(0 0 38px rgba(255, 204, 0, 0.3));
-            }
-
-            100% {
-                transform: scale(1.04) translateY(-3px) rotate(-0.8deg);
-                filter: drop-shadow(0 0 28px rgba(255, 122, 0, 0.95)) drop-shadow(0 0 58px rgba(255, 204, 0, 0.6));
-            }
-        }
-
-        @keyframes logoClickPunch {
-            0% {
-                transform: scale(1) rotate(0deg);
-            }
-
-            30% {
-                transform: scale(0.82) rotate(-12deg);
-            }
-
-            65% {
-                transform: scale(1.18) rotate(8deg);
-            }
-
-            100% {
-                transform: scale(1) rotate(0deg);
+                transform: translateY(0px) scale(1);
+                filter: drop-shadow(0 0 16px rgba(255, 122, 0, 0.55)) drop-shadow(0 0 35px rgba(255, 204, 0, 0.25));
             }
         }
 
@@ -644,17 +547,17 @@
             }
 
             35% {
-                transform: scale(1.4) rotateX(0deg) rotate(-4deg);
+                transform: scale(1.5) rotateX(0deg) rotate(-3deg);
                 filter: drop-shadow(0 0 40px var(--color-primario)) drop-shadow(0 0 70px var(--color-secundario));
                 opacity: 1;
             }
 
             60% {
-                transform: scale(1.18) rotate(3deg);
+                transform: scale(1.25) rotate(2deg);
             }
 
             85% {
-                transform: scale(0.96) rotate(-1deg);
+                transform: scale(0.97) rotate(-1deg);
             }
 
             100% {
@@ -1308,16 +1211,25 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
         }
 
-        .nosotros-img,
+        .nosotros-video-wrapper {
+            position: relative;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 122, 0, 0.4);
+            box-shadow: 0 0 35px rgba(255, 122, 0, 0.35);
+            max-width: 270px;
+        }
+
         .nosotros-video {
-            max-width: 100%;
-            max-height: 280px;
-            border-radius: 14px;
+            width: 100%;
+            height: auto;
+            max-height: 380px;
+            border-radius: 16px;
             object-fit: cover;
-            filter: drop-shadow(0 0 15px rgba(255, 122, 0, 0.55));
-            animation: flowFlotarYBrillar 4s ease-in-out infinite;
+            display: block;
         }
 
         /* --- SECCIÓN 3: UBICACIÓN --- */
@@ -1597,39 +1509,6 @@
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .footer-logo-contenedor {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 14px;
-            cursor: pointer;
-            perspective: 800px;
-        }
-
-        .footer-logo {
-            height: 60px;
-            width: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 0 10px rgba(255, 122, 0, 0.45));
-            animation: footerLogoFlotar 3.5s ease-in-out infinite;
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.4s ease;
-        }
-
-        .footer-logo-contenedor:hover .footer-logo {
-            transform: scale(1.15) translateY(-5px) rotate(-3deg);
-            filter: drop-shadow(0 0 25px rgba(255, 122, 0, 0.95)) drop-shadow(0 0 45px rgba(255, 204, 0, 0.7));
-        }
-
-        @keyframes footerLogoFlotar {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-8px) rotate(2deg) scale(1.04);
-                filter: drop-shadow(0 0 20px rgba(255, 122, 0, 0.75));
-            }
-        }
-
         footer p {
             margin-bottom: 8px;
         }
@@ -1737,7 +1616,10 @@
         <div class="intro-content-container">
             <img src="Gemini_Generated_Image_a9igk1a9igk1a9ig__1_-removebg-preview.png" alt="Nueva Colección"
                 class="splash-img-segunda">
-            <button class="btn-entrar" onclick="entrarWeb()">Entrar</button>
+            <button class="btn-entrar" onclick="entrarWeb()">
+                <span>Entrar al Flow</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
         </div>
     </div>
 
@@ -2046,12 +1928,15 @@
                         <span>Atención personalizada y asesoría de tallas por WhatsApp</span>
                     </div>
                 </div>
+            </div>
 
-                <div class="nosotros-img-contenedor">
+            <div class="nosotros-img-contenedor">
+                <div class="nosotros-video-wrapper">
                     <video src="h el 7 flow.mp4" class="nosotros-video" autoplay loop muted playsinline></video>
                 </div>
             </div>
-        </section>
+    </div>
+    </section>
 
     <!-- 3. SECCIÓN: UBICACIÓN -->
     <section id="ubicacion" class="seccion-contenedor">
@@ -2111,11 +1996,8 @@
 
     <!-- FOOTER -->
     <footer>
-        <div class="footer-logo-contenedor" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Volver al inicio">
-            <img src="flow la ventana.png" alt="Flow La Ventana" class="footer-logo">
-        </div>
         <p>&copy; 2026 Flow La Ventana. Los Locos Del Flow.</p>
-        <p class="footer-tagline">Limón, Costa Rica • La Esencia Del Estilo Urbano</p>
+        <p class="footer-tagline">Limón, Costa Rica </p>
     </footer>
 
     </div>
@@ -2200,55 +2082,20 @@
         function iniciarCambioLogo() {
             const logoPrimary = document.querySelector('.logo-primary');
             const logoSecondary = document.querySelector('.logo-secondary');
-            const logoWrapper = document.querySelector('.logo-wrapper');
             setInterval(() => {
                 if (logoPrimary && logoSecondary) {
-                    if (!logoWrapper || !logoWrapper.matches(':hover')) {
-                        logoPrimary.classList.toggle('activa');
-                        logoSecondary.classList.toggle('activa');
-                    }
+                    logoPrimary.classList.toggle('activa');
+                    logoSecondary.classList.toggle('activa');
                 }
-            }, 4500); // 4.5 segundos
+            }, 5000); // 5 segundos
         }
 
         function toggleLogoManual() {
             const logoPrimary = document.querySelector('.logo-primary');
             const logoSecondary = document.querySelector('.logo-secondary');
-            const logoWrapper = document.querySelector('.logo-wrapper');
-            if (logoWrapper) {
-                logoWrapper.classList.remove('logo-click-efecto');
-                void logoWrapper.offsetWidth; // Reflow para reiniciar animación
-                logoWrapper.classList.add('logo-click-efecto');
-            }
             if (logoPrimary && logoSecondary) {
                 logoPrimary.classList.toggle('activa');
                 logoSecondary.classList.toggle('activa');
-            }
-        }
-
-        function inicializarEfectosLogo() {
-            const logoWrapperEl = document.querySelector('.logo-wrapper');
-            if (logoWrapperEl) {
-                let animationFrameId = null;
-
-                logoWrapperEl.addEventListener('mousemove', (e) => {
-                    if (animationFrameId) cancelAnimationFrame(animationFrameId);
-                    animationFrameId = requestAnimationFrame(() => {
-                        const rect = logoWrapperEl.getBoundingClientRect();
-                        const x = e.clientX - rect.left - rect.width / 2;
-                        const y = e.clientY - rect.top - rect.height / 2;
-                        const rotateX = -(y / (rect.height / 2)) * 14;
-                        const rotateY = (x / (rect.width / 2)) * 14;
-                        logoWrapperEl.style.animationPlayState = 'paused';
-                        logoWrapperEl.style.transform = `perspective(800px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.08, 1.08, 1.08)`;
-                    });
-                });
-
-                logoWrapperEl.addEventListener('mouseleave', () => {
-                    if (animationFrameId) cancelAnimationFrame(animationFrameId);
-                    logoWrapperEl.style.transform = '';
-                    logoWrapperEl.style.animationPlayState = 'running';
-                });
             }
         }
 
@@ -2338,9 +2185,8 @@
             // Inicializar en la sección de Nosotros
             cambiarSeccion('nosotros');
 
-            // Iniciar alternado de logos e interactividad 3D
+            // Iniciar alternado de logos cada 5 segundos
             iniciarCambioLogo();
-            inicializarEfectosLogo();
 
             actualizarEstadoTienda();
             setInterval(actualizarEstadoTienda, 60000);
