@@ -7,6 +7,11 @@
     <title>Flow La Ventana | Tienda Oficial</title>
     <meta name="description"
         content="Flow La Ventana - Ropa urbana y casual con el balance perfecto entre comodidad, estilo y actitud en Limón, Costa Rica.">
+    <link rel="canonical" href="https://www.flowlaventanaa.com/">
+    <meta property="og:title" content="Flow La Ventana | Tienda Oficial">
+    <meta property="og:description" content="Ropa urbana y casual en Limón, Costa Rica. Los Locos Del Flow.">
+    <meta property="og:image" content="flow la ventana.png">
+    <meta property="og:url" content="https://www.flowlaventanaa.com/">
     <link rel="icon" href="flow la ventana.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -126,6 +131,7 @@
             left: 0;
             width: 100%;
             height: 100vh;
+            height: 100dvh;
             background: radial-gradient(circle at center, #16100c 0%, #050507 80%);
             z-index: 10000;
             display: flex;
@@ -170,7 +176,7 @@
         }
 
         .logo-primero {
-            animation: fadeOutLogo 2s forwards;
+            animation: splashLogoPrimeroEntrada 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             filter: drop-shadow(0 0 30px rgba(255, 122, 0, 0.7));
         }
 
@@ -191,8 +197,9 @@
             width: 100%;
             max-height: 40vh;
             object-fit: contain;
-            animation: flotarImagen 4s ease-in-out infinite alternate;
+            animation: splashImgFlotarMovimiento 3.4s ease-in-out infinite alternate;
             filter: drop-shadow(0 0 25px rgba(255, 122, 0, 0.5));
+            will-change: transform, filter;
         }
 
         .splash-badge {
@@ -311,24 +318,40 @@
             }
         }
 
-        @keyframes fadeOutLogo {
+        @keyframes splashLogoPrimeroEntrada {
             0% {
-                opacity: 1;
-                transform: scale(1.05);
-            }
-
-            45% {
-                opacity: 1;
-                transform: scale(1);
-            }
-
-            55% {
                 opacity: 0;
-                transform: scale(0.98);
+                transform: scale(0.65) translateY(25px) rotate(-3deg);
+                filter: drop-shadow(0 0 10px rgba(255, 122, 0, 0.3));
+            }
+
+            25% {
+                opacity: 1;
+                transform: scale(1.08) translateY(-8px) rotate(1.5deg);
+                filter: drop-shadow(0 0 40px rgba(255, 122, 0, 0.95)) drop-shadow(0 0 70px rgba(255, 204, 0, 0.6));
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1) translateY(0) rotate(0deg);
+                filter: drop-shadow(0 0 30px rgba(255, 122, 0, 0.8));
+            }
+
+            70% {
+                opacity: 1;
+                transform: scale(1.03) translateY(-4px) rotate(-1deg);
+                filter: drop-shadow(0 0 45px rgba(255, 204, 0, 0.85));
+            }
+
+            88% {
+                opacity: 0.3;
+                transform: scale(0.96) translateY(8px);
             }
 
             100% {
                 opacity: 0;
+                transform: scale(0.9) translateY(18px);
+                visibility: hidden;
             }
         }
 
@@ -356,15 +379,25 @@
             }
         }
 
-        @keyframes flotarImagen {
+        @keyframes splashImgFlotarMovimiento {
             0% {
-                transform: translateY(0);
-                filter: drop-shadow(0 0 12px rgba(255, 122, 0, 0.4));
+                transform: translateY(0px) rotate(0deg) scale(1);
+                filter: drop-shadow(0 0 18px rgba(255, 122, 0, 0.5)) drop-shadow(0 0 35px rgba(255, 204, 0, 0.25));
+            }
+
+            33% {
+                transform: translateY(-10px) rotate(-1.5deg) scale(1.02);
+                filter: drop-shadow(0 0 30px rgba(255, 122, 0, 0.8)) drop-shadow(0 0 50px rgba(255, 204, 0, 0.45));
+            }
+
+            66% {
+                transform: translateY(-16px) rotate(1.2deg) scale(1.04);
+                filter: drop-shadow(0 0 38px rgba(255, 122, 0, 0.95)) drop-shadow(0 0 65px rgba(255, 204, 0, 0.6));
             }
 
             100% {
-                transform: translateY(-12px);
-                filter: drop-shadow(0 0 28px rgba(255, 122, 0, 0.75));
+                transform: translateY(-6px) rotate(0deg) scale(1.01);
+                filter: drop-shadow(0 0 25px rgba(255, 122, 0, 0.7)) drop-shadow(0 0 45px rgba(255, 204, 0, 0.35));
             }
         }
 
@@ -435,6 +468,9 @@
             align-items: center;
             perspective: 1000px;
             cursor: pointer;
+            animation: flowLogoWrapperLevitar 3.6s ease-in-out infinite;
+            transform-style: preserve-3d;
+            transition: filter 0.4s ease;
         }
 
         .logo-wrapper::after {
@@ -444,9 +480,18 @@
             height: 140px;
             border-radius: 50%;
             background: radial-gradient(circle, rgba(255, 122, 0, 0.85) 0%, rgba(255, 204, 0, 0.4) 45%, transparent 75%);
-            opacity: 0;
+            opacity: 0.35;
             pointer-events: none;
             z-index: -1;
+            filter: blur(8px);
+            animation: auraPulsante 3s ease-in-out infinite alternate;
+            transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
+        }
+
+        .logo-wrapper:hover::after {
+            opacity: 0.85;
+            filter: blur(14px);
+            transform: scale(1.3);
         }
 
         .logo-wrapper.animar-logo::after {
@@ -457,25 +502,36 @@
             animation: logoLlamativoImpacto 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
 
+        .logo-wrapper.logo-click-efecto {
+            animation: logoClickPunch 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
         .logo {
             position: absolute;
             max-height: 185px;
             max-width: 100%;
             height: auto;
             opacity: 0;
-            transition: opacity 0.6s ease-in-out, transform 0.4s ease;
-            animation: flowFlotarYBrillar 4.5s ease-in-out infinite;
+            transform: scale(0.75) rotateY(85deg) translateY(10px);
+            transition: opacity 0.65s cubic-bezier(0.2, 0.8, 0.2, 1),
+                        transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        filter 0.65s ease;
             will-change: transform, filter, opacity;
             pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
         .logo.activa {
             opacity: 1;
+            transform: scale(1) rotateY(0deg) translateY(0);
             pointer-events: auto;
+            animation: logoGlowBreathing 3s ease-in-out infinite alternate;
         }
 
         .logo-wrapper:hover .logo.activa {
-            transform: scale(1.08) rotate(-1deg);
+            transform: scale(1.12) rotate(-1.5deg) !important;
+            filter: drop-shadow(0 0 35px var(--color-primario)) drop-shadow(0 0 70px var(--color-secundario)) !important;
         }
 
         /* Brand Pill Subtitle */
@@ -523,20 +579,67 @@
             }
         }
 
-        @keyframes flowFlotarYBrillar {
+        @keyframes flowLogoWrapperLevitar {
             0% {
-                transform: translateY(0px) scale(1);
-                filter: drop-shadow(0 0 16px rgba(255, 122, 0, 0.55)) drop-shadow(0 0 35px rgba(255, 204, 0, 0.25));
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            25% {
+                transform: translateY(-8px) rotate(-2deg);
             }
 
             50% {
-                transform: translateY(-10px) scale(1.02);
-                filter: drop-shadow(0 0 28px rgba(255, 122, 0, 0.85)) drop-shadow(0 0 55px rgba(255, 204, 0, 0.6));
+                transform: translateY(-14px) rotate(1deg);
+            }
+
+            75% {
+                transform: translateY(-6px) rotate(2deg);
             }
 
             100% {
-                transform: translateY(0px) scale(1);
-                filter: drop-shadow(0 0 16px rgba(255, 122, 0, 0.55)) drop-shadow(0 0 35px rgba(255, 204, 0, 0.25));
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+
+        @keyframes auraPulsante {
+            0% {
+                transform: scale(0.9);
+                opacity: 0.35;
+            }
+
+            100% {
+                transform: scale(1.22);
+                opacity: 0.75;
+            }
+        }
+
+        @keyframes logoGlowBreathing {
+            0% {
+                transform: scale(1) translateY(0);
+                filter: drop-shadow(0 0 18px rgba(255, 122, 0, 0.65)) drop-shadow(0 0 38px rgba(255, 204, 0, 0.3));
+            }
+
+            100% {
+                transform: scale(1.04) translateY(-3px) rotate(-0.8deg);
+                filter: drop-shadow(0 0 28px rgba(255, 122, 0, 0.95)) drop-shadow(0 0 58px rgba(255, 204, 0, 0.6));
+            }
+        }
+
+        @keyframes logoClickPunch {
+            0% {
+                transform: scale(1) rotate(0deg);
+            }
+
+            30% {
+                transform: scale(0.82) rotate(-12deg);
+            }
+
+            65% {
+                transform: scale(1.18) rotate(8deg);
+            }
+
+            100% {
+                transform: scale(1) rotate(0deg);
             }
         }
 
@@ -547,17 +650,17 @@
             }
 
             35% {
-                transform: scale(1.5) rotateX(0deg) rotate(-3deg);
+                transform: scale(1.4) rotateX(0deg) rotate(-4deg);
                 filter: drop-shadow(0 0 40px var(--color-primario)) drop-shadow(0 0 70px var(--color-secundario));
                 opacity: 1;
             }
 
             60% {
-                transform: scale(1.25) rotate(2deg);
+                transform: scale(1.18) rotate(3deg);
             }
 
             85% {
-                transform: scale(0.97) rotate(-1deg);
+                transform: scale(0.96) rotate(-1deg);
             }
 
             100% {
@@ -1211,25 +1314,27 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
         }
 
-        .nosotros-video-wrapper {
-            position: relative;
-            border-radius: 18px;
-            overflow: hidden;
-            border: 2px solid rgba(255, 122, 0, 0.4);
-            box-shadow: 0 0 35px rgba(255, 122, 0, 0.35);
-            max-width: 270px;
-        }
-
+        .nosotros-img,
         .nosotros-video {
-            width: 100%;
-            height: auto;
-            max-height: 380px;
-            border-radius: 16px;
+            max-width: 100%;
+            max-height: 280px;
+            border-radius: 14px;
             object-fit: cover;
-            display: block;
+            filter: drop-shadow(0 0 15px rgba(255, 122, 0, 0.55));
+            animation: videoNosotrosFlotar 4s ease-in-out infinite;
+        }
+
+        @keyframes videoNosotrosFlotar {
+            0%, 100% {
+                transform: translateY(0px);
+                filter: drop-shadow(0 0 15px rgba(255, 122, 0, 0.55));
+            }
+            50% {
+                transform: translateY(-8px) scale(1.01);
+                filter: drop-shadow(0 0 25px rgba(255, 122, 0, 0.8));
+            }
         }
 
         /* --- SECCIÓN 3: UBICACIÓN --- */
@@ -1509,6 +1614,39 @@
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
+        .footer-logo-contenedor {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 14px;
+            cursor: pointer;
+            perspective: 800px;
+        }
+
+        .footer-logo {
+            height: 60px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(255, 122, 0, 0.45));
+            animation: footerLogoFlotar 3.5s ease-in-out infinite;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.4s ease;
+        }
+
+        .footer-logo-contenedor:hover .footer-logo {
+            transform: scale(1.15) translateY(-5px) rotate(-3deg);
+            filter: drop-shadow(0 0 25px rgba(255, 122, 0, 0.95)) drop-shadow(0 0 45px rgba(255, 204, 0, 0.7));
+        }
+
+        @keyframes footerLogoFlotar {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-8px) rotate(2deg) scale(1.04);
+                filter: drop-shadow(0 0 20px rgba(255, 122, 0, 0.75));
+            }
+        }
+
         footer p {
             margin-bottom: 8px;
         }
@@ -1539,7 +1677,7 @@
             background: var(--color-secundario);
         }
 
-        /* Responsive Mobile Adjustments */
+        /* Responsive Mobile & Desktop Adjustments */
         @media (max-width: 768px) {
             .titulo-seccion {
                 font-size: 2.8rem;
@@ -1551,6 +1689,7 @@
                 width: 95%;
                 padding: 6px 8px;
                 border-radius: 30px;
+                gap: 4px;
             }
 
             .navbar a {
@@ -1582,23 +1721,77 @@
                 height: 50px;
                 font-size: 1.5rem;
             }
+
+            .catalogo-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 20px;
+            }
         }
 
         @media (max-width: 480px) {
             .navbar {
-                bottom: 10px;
+                bottom: 8px;
                 width: 96%;
-                padding: 4px 6px;
+                padding: 4px 4px;
+                justify-content: space-around;
             }
 
             .navbar a {
-                font-size: 0.85rem;
-                padding: 6px 8px;
+                font-size: 0.82rem;
+                padding: 6px 6px;
                 letter-spacing: 0px;
+                flex: 1;
+                justify-content: center;
             }
 
             .navbar a span {
                 display: inline;
+            }
+
+            .catalogo-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .seccion-contenedor {
+                padding: 24px 12px 60px 12px;
+            }
+
+            .titulo-seccion {
+                font-size: 2.4rem;
+            }
+
+            .ubicacion-card {
+                padding: 24px 16px;
+            }
+        }
+
+        /* Desktop Optimization (Computadora) */
+        @media (min-width: 1024px) {
+            .catalogo-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+            }
+
+            .seccion-contenedor {
+                max-width: 1180px;
+            }
+
+            .navbar {
+                bottom: 24px;
+                max-width: 560px;
+                padding: 8px 18px;
+            }
+
+            .navbar a {
+                font-size: 1.05rem;
+                padding: 8px 18px;
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .catalogo-grid {
+                grid-template-columns: repeat(4, 1fr);
             }
         }
     </style>
@@ -1611,15 +1804,12 @@
     <div class="ambient-glow ambient-glow-2"></div>
 
     <!-- PANTALLA DE INTRODUCCIÓN (SPLASH SCREEN) -->
-    <div class="splash-screen">
-        <img src="flow la ventana.png" alt="Flow La Ventana" class="splash-img logo-primero">
+    <div class="splash-screen" onclick="entrarWeb()" style="cursor: pointer;">
+        <img src="flow%20la%20ventana.png" alt="Flow La Ventana" class="splash-img logo-primero">
         <div class="intro-content-container">
             <img src="Gemini_Generated_Image_a9igk1a9igk1a9ig__1_-removebg-preview.png" alt="Nueva Colección"
                 class="splash-img-segunda">
-            <button class="btn-entrar" onclick="entrarWeb()">
-                <span>Entrar al Flow</span>
-                <i class="fa-solid fa-arrow-right"></i>
-            </button>
+            <button class="btn-entrar" onclick="event.stopPropagation(); entrarWeb()">Entrar</button>
         </div>
     </div>
 
@@ -1655,7 +1845,7 @@
         <!-- HEADER CON LOGOS INTERCAMBIABLES Y REFLEJO -->
         <header>
             <div class="logo-wrapper" onclick="toggleLogoManual()" title="Flow La Ventana">
-                <img src="flow la ventana.png" alt="Flow La Ventana" class="logo logo-primary activa">
+                <img src="flow%20la%20ventana.png" alt="Flow La Ventana" class="logo logo-primary activa">
                 <img src="Gemini_Generated_Image_a9igk1a9igk1a9ig__1_-removebg-preview.png" alt="Flow La Ventana"
                     class="logo logo-secondary">
             </div>
@@ -1713,10 +1903,8 @@
 
                 <!-- 2. Camisa Premium -->
                 <div class="cat-card" data-category="ropa" data-nombre="camisa premium">
-                    <div class="card-media-container" onmouseenter="playCardVideo(this)"
-                        onmouseleave="pauseCardVideo(this)" ontouchstart="playCardVideo(this)">
+                    <div class="card-media-container">
                         <img src="CamisaPr.png" alt="Camisa Premium" loading="lazy">
-                        <video src="camisa premium.mp4" muted loop playsinline></video>
                     </div>
                     <h3>Camisa Premium</h3>
                     <p>Descubre nuestra variedad de Camisas Premium</p>
@@ -1744,7 +1932,7 @@
                     <div class="card-media-container" onmouseenter="playCardVideo(this)"
                         onmouseleave="pauseCardVideo(this)" ontouchstart="playCardVideo(this)">
                         <img src="Short.jpg" alt="Shorts" loading="lazy">
-                        <video src="panta preee.mp4" muted loop playsinline></video>
+                        <video src="panta%20preee.mp4" muted loop playsinline></video>
                     </div>
                     <h3>Short</h3>
                     <p>Bañadores y Bermudas Colombianas, resistentes y con el mejor estilo.</p>
@@ -1759,8 +1947,8 @@
                 <div class="cat-card" data-category="accesorios" data-nombre="lentes gafas">
                     <div class="card-media-container" onmouseenter="playCardVideo(this)"
                         onmouseleave="pauseCardVideo(this)" ontouchstart="playCardVideo(this)">
-                        <img src="FL Lentes.png" alt="Lentes" loading="lazy">
-                        <video src="lentes flow.mp4" muted loop playsinline></video>
+                        <img src="FL%20Lentes.png" alt="Lentes" loading="lazy">
+                        <video src="lentes%20flow.mp4" muted loop playsinline></video>
                     </div>
                     <h3>Lentes</h3>
                     <p>Descubre nuestra variedad de Lentes.</p>
@@ -1833,7 +2021,7 @@
 
                 <!-- 11. Reloj De Mujer -->
                 <div class="cat-card" data-category="joyas" data-nombre="reloj de mujer relojes dama">
-                    <img src="Reloj de M.png" alt="Reloj De Mujer" loading="lazy">
+                    <img src="Reloj%20de%20M.png" alt="Reloj De Mujer" loading="lazy">
                     <h3>Reloj De Mujer</h3>
                     <p>Descubre nuestra variedad de Reloj De Mujer.</p>
                     <a href="https://drive.google.com/drive/folders/1-pJpRVvsufwpNO6bU26M1gh5o9rA3-Xt" class="btn-drive"
@@ -1928,15 +2116,12 @@
                         <span>Atención personalizada y asesoría de tallas por WhatsApp</span>
                     </div>
                 </div>
-            </div>
 
-            <div class="nosotros-img-contenedor">
-                <div class="nosotros-video-wrapper">
-                    <video src="h el 7 flow.mp4" class="nosotros-video" autoplay loop muted playsinline></video>
+                <div class="nosotros-img-contenedor">
+                    <video src="h%20el%207%20flow.mp4" class="nosotros-video" autoplay loop muted playsinline></video>
                 </div>
             </div>
-    </div>
-    </section>
+        </section>
 
     <!-- 3. SECCIÓN: UBICACIÓN -->
     <section id="ubicacion" class="seccion-contenedor">
@@ -1996,27 +2181,39 @@
 
     <!-- FOOTER -->
     <footer>
+        <div class="footer-logo-contenedor" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Volver al inicio">
+            <img src="flow%20la%20ventana.png" alt="Flow La Ventana" class="footer-logo">
+        </div>
         <p>&copy; 2026 Flow La Ventana. Los Locos Del Flow.</p>
-        <p class="footer-tagline">Limón, Costa Rica </p>
+        <p class="footer-tagline">Limón, Costa Rica • La Esencia Del Estilo Urbano</p>
+        <p style="font-size: 0.82rem; color: #888; margin-top: 6px; letter-spacing: 1.5px; font-weight: 500;">
+            <i class="fa-solid fa-globe" style="color: var(--color-primario); margin-right: 5px;"></i>www.flowlaventanaa.com
+        </p>
     </footer>
 
     </div>
 
     <!-- LÓGICA Y SCRIPTS INTERACTIVOS -->
     <script>
+        let webEntradaRealizada = false;
+
         function entrarWeb() {
+            if (webEntradaRealizada) return;
+            webEntradaRealizada = true;
+
             const splash = document.querySelector('.splash-screen');
             const mainWrapper = document.querySelector('.main-wrapper');
+
             if (splash) {
                 splash.classList.add('ocultar-splash');
+                setTimeout(() => {
+                    splash.style.display = 'none';
+                }, 2000);
             }
 
-            // Sincronizado con la transición del splash
-            setTimeout(() => {
-                if (mainWrapper) {
-                    mainWrapper.classList.add('mostrar-contenido');
-                }
-            }, 1200);
+            if (mainWrapper) {
+                mainWrapper.classList.add('mostrar-contenido');
+            }
         }
 
         function playCardVideo(container) {
@@ -2082,20 +2279,55 @@
         function iniciarCambioLogo() {
             const logoPrimary = document.querySelector('.logo-primary');
             const logoSecondary = document.querySelector('.logo-secondary');
+            const logoWrapper = document.querySelector('.logo-wrapper');
             setInterval(() => {
                 if (logoPrimary && logoSecondary) {
-                    logoPrimary.classList.toggle('activa');
-                    logoSecondary.classList.toggle('activa');
+                    if (!logoWrapper || !logoWrapper.matches(':hover')) {
+                        logoPrimary.classList.toggle('activa');
+                        logoSecondary.classList.toggle('activa');
+                    }
                 }
-            }, 5000); // 5 segundos
+            }, 4500); // 4.5 segundos
         }
 
         function toggleLogoManual() {
             const logoPrimary = document.querySelector('.logo-primary');
             const logoSecondary = document.querySelector('.logo-secondary');
+            const logoWrapper = document.querySelector('.logo-wrapper');
+            if (logoWrapper) {
+                logoWrapper.classList.remove('logo-click-efecto');
+                void logoWrapper.offsetWidth; // Reflow para reiniciar animación
+                logoWrapper.classList.add('logo-click-efecto');
+            }
             if (logoPrimary && logoSecondary) {
                 logoPrimary.classList.toggle('activa');
                 logoSecondary.classList.toggle('activa');
+            }
+        }
+
+        function inicializarEfectosLogo() {
+            const logoWrapperEl = document.querySelector('.logo-wrapper');
+            if (logoWrapperEl) {
+                let animationFrameId = null;
+
+                logoWrapperEl.addEventListener('mousemove', (e) => {
+                    if (animationFrameId) cancelAnimationFrame(animationFrameId);
+                    animationFrameId = requestAnimationFrame(() => {
+                        const rect = logoWrapperEl.getBoundingClientRect();
+                        const x = e.clientX - rect.left - rect.width / 2;
+                        const y = e.clientY - rect.top - rect.height / 2;
+                        const rotateX = -(y / (rect.height / 2)) * 14;
+                        const rotateY = (x / (rect.width / 2)) * 14;
+                        logoWrapperEl.style.animationPlayState = 'paused';
+                        logoWrapperEl.style.transform = `perspective(800px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.08, 1.08, 1.08)`;
+                    });
+                });
+
+                logoWrapperEl.addEventListener('mouseleave', () => {
+                    if (animationFrameId) cancelAnimationFrame(animationFrameId);
+                    logoWrapperEl.style.transform = '';
+                    logoWrapperEl.style.animationPlayState = 'running';
+                });
             }
         }
 
@@ -2182,11 +2414,28 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Inicializar en la sección de Nosotros
-            cambiarSeccion('nosotros');
+            // Permitir entrar con teclado (Enter o Espacio)
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    entrarWeb();
+                }
+            });
 
-            // Iniciar alternado de logos cada 5 segundos
+            // Auto-entrada de respaldo tras 6 segundos por seguridad
+            setTimeout(() => {
+                entrarWeb();
+            }, 6000);
+
+            // Obtener sección desde la hash del URL (si existe)
+            const initialHash = window.location.hash ? window.location.hash.replace('#', '') : 'nosotros';
+            const validSections = ['nosotros', 'catalogo', 'ubicacion', 'redes-sociales'];
+            const seccionInicial = validSections.includes(initialHash) ? initialHash : 'nosotros';
+
+            cambiarSeccion(seccionInicial);
+
+            // Iniciar alternado de logos e interactividad 3D
             iniciarCambioLogo();
+            inicializarEfectosLogo();
 
             actualizarEstadoTienda();
             setInterval(actualizarEstadoTienda, 60000);
